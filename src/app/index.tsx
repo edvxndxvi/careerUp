@@ -3,27 +3,13 @@ import {  ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NewAnalysisCard from "@/components/NewAnalysisCard";
 import AnalysisHistoryCard from "@/components/AnalysisHistoryCard";
+import { analises } from "../data/analises";
 
-const analises = [
-    {
-        id: 1,
-        titulo: "Potencial e Direcionamento de Carreira em Engenharia de Dados",
-        preview: "Seu perfil demonstra boa base técnica em Python e SQL, com curiosidade natural para entender o fluxo de dados e criar soluções automatizadas. No entanto, para acompanhar as tendências do mercado...",
-        data: "1 dia atras"
-    },
-    {
-        id: 2,
-        titulo: "Evoluindo de Estagiário para Engenheiro de Dados Júnior",
-        preview: "Sua trajetória mostra evolução constante em manipulação de dados e aprendizado rápido em ambientes técnicos. Para se destacar no próximo passo da carreira, é importante aprimorar práticas de...",
-        data: "01/01/2023"
-    },
-    {
-        id: 3,
-        titulo: "Preparação para o Futuro da Engenharia de Dados",
-        preview: "O mercado de dados está cada vez mais orientado à automação e governança. Seu perfil técnico está bem direcionado, mas é recomendável desenvolver competências em modelagem de dados para...",
-        data: "01/01/2023"
-    }
-]
+
+function limitarTexto(texto: string, limite: number) {
+  const plain = texto.replace(/[#>*_\-\n]/g, " ").replace(/\s+/g, " ");
+  return plain.length > limite ? plain.substring(0, limite) + "..." : plain;
+}
 
 export default function Index(){
     return(
@@ -38,7 +24,7 @@ export default function Index(){
                     <Text className="text-xl font-medium mt-4 text-title">Histórico</Text>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} className="py-4">
                         {analises.map((a) => (
-                        <AnalysisHistoryCard key={a.id} titulo={a.titulo} preview={a.preview} data={a.data}/>
+                        <AnalysisHistoryCard key={a.id} id={a.id} titulo={a.titulo} preview={limitarTexto(a.descricao, 100)} data={a.data}/>
                         ))}
                     </ScrollView>
                 </View>
