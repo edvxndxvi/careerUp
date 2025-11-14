@@ -14,9 +14,6 @@ export function AvatarButton() {
 export function Avatar(){
     return(
         <View className="h-32 w-32 bg-slate-700 rounded-full self-center relative">
-            <Pressable className="bg-slate-400 self-end p-2 rounded-full absolute bottom-0">
-                <FontAwesome5 name="pen" size={18} color="white" />
-            </Pressable>
         </View>
     )
 }

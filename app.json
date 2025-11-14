@@ -8,9 +8,6 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "scheme": "careerup",
-    "experiments": {
-      "bridgeless": false
-    },
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
