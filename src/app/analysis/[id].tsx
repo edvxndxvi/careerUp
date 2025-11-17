@@ -1,12 +1,14 @@
 import { router, useLocalSearchParams } from "expo-router";
-import { Pressable, View, Text } from "react-native";
+import { Pressable, View, Text, ScrollView } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { analises } from "../../data/analises";
+import Markdown from "react-native-markdown-renderer";
 
 export default function AnalysisDetail(){
     const { id } = useLocalSearchParams();
     const analise = analises.find((a) => a.id === id);
+    const MarkdownAny = Markdown as any;
 
     if (!analise) {
     return (
@@ -26,9 +28,11 @@ export default function AnalysisDetail(){
                     >
                         <FontAwesome5 name="chevron-left" size={18} color="#6E6E73" />
                     </Pressable>
-                </View>
-                <View className="mt-4">
-                    <Text>{id}</Text>
+                <ScrollView className="mt-4 mb-24">
+                    <Text className="text-2xl font-semibold text-title mb-2">{analise.titulo}</Text>
+                    <Text className="text-xs text-detail mb-8">{analise.data}</Text>
+                    <MarkdownAny>{analise.descricao}</MarkdownAny>
+                </ScrollView>
                 </View>
             </View>
         </SafeAreaView>
