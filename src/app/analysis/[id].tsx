@@ -2,18 +2,35 @@ import { router, useLocalSearchParams } from "expo-router";
 import { Pressable, View, Text, ScrollView } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { SafeAreaView } from "react-native-safe-area-context";
-import { analises } from "../../data/analises";
 import Markdown from 'react-native-markdown-display';
+import { useEffect, useState } from "react";
+import { getAnalysisById } from "@/storage/analysisStorage";
 
 export default function AnalysisDetail(){
     const { id } = useLocalSearchParams();
-    const analise = analises.find((a) => a.id === id);
+    const [analysis, setAnalysis] = useState<any | null>(null);
 
-    if (!analise) {
+    useEffect(() => {
+        async function load() {
+            const item = await getAnalysisById(id);
+            setAnalysis(item);
+        }
+        load();
+    }, [id]);
+    
+    if (!analysis) {
     return (
-            <View className="bg-bg flex-1 items-center justify-center">
-                <Text className="title-tile"> Análise não encontrada. </Text>
-            </View>
+            <SafeAreaView className="bg-bg flex-1">
+                <View className="px-4">
+                    <Pressable 
+                            className="flex-row w-12 h-12 items-center justify-center bg-card border-border border-[1px] self-start rounded-full mt-4"
+                            onPress={() => router.push('/')}
+                        >
+                            <FontAwesome5 name="chevron-left" size={18} color="#A1A1AA" />
+                    </Pressable>
+                    <Text className="text-xl top-72 text-center text-title mt-4">Análise não encontrada</Text>
+                </View>
+            </SafeAreaView>
         );
     }
 
@@ -28,8 +45,8 @@ export default function AnalysisDetail(){
                         <FontAwesome5 name="chevron-left" size={18} color="#A1A1AA" />
                     </Pressable>
                 <ScrollView className="mt-4 mb-24">
-                    <Text className="text-3xl font-medium text-title mb-2">{analise.titulo}</Text>
-                    <Text className="text-sm text-detail mb-4">{analise.data}</Text>
+                    <Text className="text-3xl font-medium text-title mb-2">{analysis.titulo}</Text>
+                    <Text className="text-sm text-detail mb-4">{analysis.data}</Text>
                     <Markdown 
                         style={{
                             body: {
@@ -69,7 +86,7 @@ export default function AnalysisDetail(){
                             },
                         }}
                     >
-                        {analise.descricao}
+                        {analysis.descricao}
                     </Markdown>
                 </ScrollView>
                 </View>

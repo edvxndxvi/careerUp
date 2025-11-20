@@ -1,6 +1,7 @@
 import { View, Text, ActivityIndicator } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { useEffect, useState } from "react";
+import { analyzeProfile } from "@/services/gemini";
 
 export default function LoadingScreen() {
   const { objetivo } = useLocalSearchParams();
@@ -13,22 +14,36 @@ export default function LoadingScreen() {
     "Gerando caminhos de evolução profissional…"
   ];
 
+    const objetivoText = Array.isArray(objetivo) ? objetivo[0] : objetivo ?? "";
+
+    const userData = {
+    area: "Desenvolvedor Frontend",
+    objetivo: objetivoText,
+    habilidades: ["React", "TypeScript", "UI/UX"],
+    experiencias: [
+      { cargo: "Frontend Jr", empresa: "TechCorp", periodo: "2023 - Atualmente" }
+    ]
+  };
+  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setStep((prev) => (prev + 1) % frases.length);
-    }, 1200);
+    }, 3000);
 
-    const timeout = setTimeout(() => {
-      router.push({
-        pathname: "/analysis/[id].tsx",
-        params: { objetivo }
-      });
-    }, 4500);
+    async function runAnalysis() {
+      try {
+        const json = await analyzeProfile(userData);
 
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
+        router.replace(`/analysis/${json.id}`);
+      } catch (e) {
+        router.replace("/analysis/error");
+      }
+    }
+
+    runAnalysis();
+
+    return () => clearInterval(interval);
   }, []);
 
   return (

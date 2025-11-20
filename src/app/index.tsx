@@ -3,7 +3,10 @@ import {  ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NewAnalysisCard from "@/components/NewAnalysisCard";
 import AnalysisHistoryCard from "@/components/AnalysisHistoryCard";
-import { analises } from "../data/analises";
+import { useState } from "react";
+import { Analysis, getAnalyses } from "@/storage/analysisStorage";
+import { useFocusEffect } from "expo-router";
+import React from "react";
 
 
 function limitarTexto(texto: string, limite: number) {
@@ -12,6 +15,19 @@ function limitarTexto(texto: string, limite: number) {
 }
 
 export default function Index(){
+    const [history, setHistory] = useState<Analysis[]>([]);
+
+    async function load() {
+    const data = await getAnalyses();
+    setHistory(data);
+  }
+
+    useFocusEffect(
+        React.useCallback(() => {
+        load();
+        return () => {};
+        }, [])
+    );
     return(
         <SafeAreaView className="flex-1 bg-bg">
             <View className="px-4 mt-4">
@@ -23,7 +39,7 @@ export default function Index(){
                 <View className="mt-6">
                     <Text className="text-xl font-medium mt-4 text-title">Histórico de Análises</Text>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} className="py-4">
-                        {analises.map((a) => (
+                        {history.map((a) => (
                         <AnalysisHistoryCard key={a.id} id={a.id} titulo={a.titulo} preview={limitarTexto(a.descricao, 100)} data={a.data}/>
                         ))}
                     </ScrollView>

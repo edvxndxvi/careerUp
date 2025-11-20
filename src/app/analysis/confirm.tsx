@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ConfirmScreen() {
   const [objetivo, setObjetivo] = useState("");
+  const [erro, setErro] = useState(false);
 
   const user = {
     area: "Desenvolvedor Frontend",
@@ -19,7 +20,15 @@ export default function ConfirmScreen() {
     ],
   };
 
+
+
   const iniciarAnalise = () => {
+    if (!objetivo.trim()) {
+      setErro(true);
+      return;
+    }
+
+    setErro(false);
     router.push({
       pathname: "/analysis/loading",
       params: { objetivo },
@@ -71,12 +80,23 @@ export default function ConfirmScreen() {
           </Text>
 
           <TextInput
-            placeholder="Ex: Me tornar Desenvolvedor Pleno em 2026"
+            placeholder="Ex: Me tornar Desenvolvedor Pleno"
             placeholderTextColor="#8E8E93"
             value={objetivo}
-            onChangeText={setObjetivo}
-            className="bg-bg p-4 rounded-xl text-title border border-border"
+            onChangeText={(text) => {
+              setObjetivo(text);
+              if (erro) setErro(false);
+            }}
+            className={`bg-bg p-4 rounded-xl text-title border ${
+              erro ? "border-red-500" : "border-border"
+            }`}
           />
+
+          {erro && (
+            <Text className="text-red-500 mt-2 text-sm">
+              Defina um objetivo antes de continuar.
+            </Text>
+          )}
         </View>
 
         {/* Botões */}

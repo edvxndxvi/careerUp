@@ -3,6 +3,7 @@ import { FontAwesome5  } from '@expo/vector-icons';
 import { router } from "expo-router";
 
 export default function NewAnalysisCard(){
+    
     return(
         <ImageBackground 
             className=" mt-6 rounded-[32px] p-4" 
