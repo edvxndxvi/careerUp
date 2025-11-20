@@ -21,7 +21,7 @@ export default function Index(){
                 </View>
                 <NewAnalysisCard/>
                 <View className="mt-6">
-                    <Text className="text-xl font-medium mt-4 text-title">Histórico</Text>
+                    <Text className="text-xl font-medium mt-4 text-title">Histórico de Análises</Text>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} className="py-4">
                         {analises.map((a) => (
                         <AnalysisHistoryCard key={a.id} id={a.id} titulo={a.titulo} preview={limitarTexto(a.descricao, 100)} data={a.data}/>

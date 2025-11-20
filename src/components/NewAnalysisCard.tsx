@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity, ImageBackground, } from "react-native";
 import { FontAwesome5  } from '@expo/vector-icons';
+import { router } from "expo-router";
 
 export default function NewAnalysisCard(){
     return(
@@ -15,7 +16,7 @@ export default function NewAnalysisCard(){
                 <Text className="text-white text-xl font-medium">Análise Inteligente do Perfil</Text>
             </View>
             <Text className="text-indigo-50 my-5 w-9/12">Descubra como evoluir na sua carreira com base no seu perfil e nas tendências futuras.</Text>
-            <TouchableOpacity className="bg-white block py-4 px-6 rounded-full self-start">
+            <TouchableOpacity className="bg-white block py-4 px-6 rounded-full self-start" onPress={() => router.push('/analysis/confirm')}>
                 <Text className="text-[#7A5AF5] font-semibold">Analisar meu perfil</Text>
             </TouchableOpacity>
         </ImageBackground>

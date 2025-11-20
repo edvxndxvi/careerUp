@@ -11,8 +11,8 @@ export default function AnalysisDetail(){
 
     if (!analise) {
     return (
-            <View className="flex-1 items-center justify-center">
-                <Text> Análise não encontrada. </Text>
+            <View className="bg-bg flex-1 items-center justify-center">
+                <Text className="title-tile"> Análise não encontrada. </Text>
             </View>
         );
     }
@@ -23,9 +23,9 @@ export default function AnalysisDetail(){
                 <View className="mt-4">
                     <Pressable 
                         className="flex-row w-12 h-12 items-center justify-center bg-card border-border border-[1px] self-start rounded-full"
-                        onPress={() => router.back()}
+                        onPress={() => router.push('/')}
                     >
-                        <FontAwesome5 name="chevron-left" size={18} color="#6E6E73" />
+                        <FontAwesome5 name="chevron-left" size={18} color="#A1A1AA" />
                     </Pressable>
                 <ScrollView className="mt-4 mb-24">
                     <Text className="text-3xl font-medium text-title mb-2">{analise.titulo}</Text>
@@ -35,10 +35,10 @@ export default function AnalysisDetail(){
                             body: {
                             fontSize: 16,
                             lineHeight: 24,
-                            color: "#6E6E73",
+                            color: "#A1A1AA",
                             },
                             heading1: {
-                            color: "#1A1A1E",
+                            color: "#F4F4F5",
                             fontSize: 24,
                             lineHeight: 32,
                             fontWeight: "bold",
@@ -46,7 +46,7 @@ export default function AnalysisDetail(){
                             marginBottom: 8,
                             },
                             heading2: {
-                            color: "#1A1A1E",
+                            color: "#F4F4F5",
                             fontSize: 20,
                             fontWeight: "bold",
                             marginTop: 16,
@@ -60,6 +60,8 @@ export default function AnalysisDetail(){
                             bullet_list_item: { marginBottom: 6 },
                             ordered_list_item: { marginBottom: 6 },
                             blockquote: {
+                            backgroundColor: "#1A1A1F",
+                            color: "#F4F4F5",
                             borderLeftWidth: 4,
                             borderLeftColor: "#F2C45E",
                             paddingLeft: 12,
