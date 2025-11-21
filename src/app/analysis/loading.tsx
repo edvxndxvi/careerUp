@@ -1,9 +1,10 @@
 import { View, Text, ActivityIndicator } from "react-native";
-import { useLocalSearchParams, router } from "expo-router";
+import { useLocalSearchParams, useRouter, router } from 'expo-router';
 import { useEffect, useState } from "react";
 import { analyzeProfile } from "@/services/gemini";
 
 export default function LoadingScreen() {
+  const router = useRouter();
   const { objetivo } = useLocalSearchParams();
   const [step, setStep] = useState(0);
 
@@ -17,7 +18,7 @@ export default function LoadingScreen() {
     const objetivoText = Array.isArray(objetivo) ? objetivo[0] : objetivo ?? "";
 
     const userData = {
-    area: "Desenvolvedor Frontend",
+    area: "Desenvolvedora Frontend",
     objetivo: objetivoText,
     habilidades: ["React", "TypeScript", "UI/UX"],
     experiencias: [

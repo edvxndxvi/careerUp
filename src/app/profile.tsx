@@ -7,15 +7,16 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import { Avatar } from "@/components/Avatar";
 import { useState } from "react";
 
 export default function Profile() {
+  const router = useRouter();
+  
   const user = {
-    name: "Edvan Davi",
-    title: "Profissional em Desenvolvimento",
-    objetivo: "Me tornar Desenvolvedor Mobile Pleno",
+    name: "Maria Luisa",
+    title: "Desenvolvedora Front End",
     habilidades: [
       { nome: "React Native", nivel: "Intermediário" },
       { nome: "Java", nivel: "Básico" },

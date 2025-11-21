@@ -32,7 +32,7 @@
       "expo-router"
     ],
     "extra": {
-      "GEMINI_API_KEY": "AIzaSyBOuYaXj2jbkkNeFnh3OZvskXumFL1M7oE"
+      "GEMINI_API_KEY": "SUA_API_KEY_AQUI"
     }
   }
 }

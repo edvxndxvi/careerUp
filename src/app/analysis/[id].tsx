@@ -69,6 +69,9 @@ export default function AnalysisDetail(){
                             marginTop: 16,
                             marginBottom: 8,
                             },
+                            heading3:{
+                                color: "#F4F4F5",
+                            },
                             paragraph: {
                             marginBottom: 12,
                             },

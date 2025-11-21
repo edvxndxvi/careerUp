@@ -1,15 +1,16 @@
-import { View, Text, TextInput, Pressable, ScrollView } from "react-native";
+import { View, Text, TextInput, Pressable } from "react-native";
 import { useState } from "react";
-import { router } from "expo-router";
+import { useRouter, router } from 'expo-router';
 import { FontAwesome5 } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ConfirmScreen() {
+  const router = useRouter();
   const [objetivo, setObjetivo] = useState("");
   const [erro, setErro] = useState(false);
 
   const user = {
-    area: "Desenvolvedor Frontend",
+    area: "Desenvolvedora Frontend",
     habilidades: ["React", "TypeScript", "UI/UX"],
     experiencias: [
       {
@@ -102,7 +103,7 @@ export default function ConfirmScreen() {
         {/* Botões */}
         <View className="flex-row justify-between mt-4">
           <Pressable
-            onPress={() => router.push("/profile")}
+            onPress={() => router.push("profile")}
             className="px-5 py-3 bg-card border border-border rounded-xl"
           >
             <Text className="text-textSecondary">Revisar Perfil</Text>
